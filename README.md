@@ -1,4 +1,9 @@
-# Instruction
+# Link to the website to the finished exercice:
+
+(https://lockybounty.github.io/assessment1-oct-18/)[Website: Number to text]
+
+
+# Instructions
 
 # Number to Text
 

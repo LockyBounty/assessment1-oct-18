@@ -1,11 +1,11 @@
-let userInput = prompt(`Please enter a number between 0 and 999: `);
+let userInput = prompt(`Veuillez entrer un chiffre entre 0 et 999: `);
 let userConverti = parseInt(userInput);
 console.log(userInput);
 
-let tabUnit = ["", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"];
-let tabSpec10 = ["ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"];
-let tabDeca = ["and", "twenty", "thirty", "fourty", "fifty", "sixty", "seventy", "eighty", "ninety"];
-let tabCenti = ["hundred"];
+let tabUnit = ["", "un", "deux", "trois", "quatre", "cinq", "six", "sept", "huit", "neuf", "dix"];
+let tabSpec10 = ["dix", "onze", "douze", "treize", "quatorze", "quinze", "seize", "dix-sept", "dix-huit", "dix-neuf"];
+let tabDeca = ["et", "vingt", "trente", "quarante", "cinquante", "soixante", "quatre-vingt"];
+let tabCenti = ["cent"];
 
 let unites = (num) => {
     for (i = 0; i < tabUnit.length; i++) {
@@ -44,33 +44,39 @@ let centaines = (num) => {
     let a = Math.floor(num / 100);
     let b = num % 100;
     let c = Math.floor(num / 10);
-
-    return `${unites(a)}-${tabCenti[0]}`;
+    let d = 0;
+    if (b !==1 ){
+        d = `${unites(a)}-${tabCenti[0]}`;
+    }else if (b === 1 || a === 0){
+        d = `${tabCenti[0]}`;
+    }
+    return d;
 
 }
 
 
 if (userConverti < 0 || userConverti > 999 || isNaN(userConverti)) {
-    confirm(`You must enter a number between 0 and 999, you idiot!`);
+    confirm(`Un chiffre entre 0 et 999, bon sang !`);
 } else if (userConverti >= 0 && userConverti <= 10) {
-    if (userConverti !== 0){
 
-    
     confirm(`${unites(userConverti)}`);
-    }else{
-        confirm("zero");
-    }
+
 } else if (userConverti > 10 && userConverti < 20) {
 
 
     confirm(`${special10(userConverti)}`);
 
-} else if (userConverti >= 20 && userConverti < 100) {
+} else if (userConverti >= 20 && userConverti <= 99) {
+    if (userConverti % 10 !== 1) {
 
-    confirm(`${dizaines(userConverti)}-${unites(userConverti%10)}`);
+        confirm(`${dizaines(userConverti)}-${unites(userConverti%10)}`);
+
+    } else {
+        confirm(`${dizaines(userConverti)}-et-${unites(userConverti%10)}`);
+    }
 
 } else if (userConverti >= 100 && userConverti < 1000) {
-    if (userConverti % 100 < 10 || userConverti % 100 > 19) {
+    if (userConverti % 100 < 10 || userConverti % 100 > 19 ) {
 
         confirm(`${centaines(userConverti)}-${dizaines(userConverti%100)}-${unites(userConverti%10)}`);
 

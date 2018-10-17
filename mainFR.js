@@ -10,7 +10,10 @@ let tabCenti = ["cent"];
 let unites = (num) => {
     for (i = 0; i < tabUnit.length; i++) {
         if (num === i) {
-            return tabUnit[i];
+            if(num !== 1){
+            return tabUnit[i];}else{
+                return `et-un`;
+            }
         }
     }
 }
@@ -42,12 +45,12 @@ let special10 = (num) => {
 
 let centaines = (num) => {
     let a = Math.floor(num / 100);
-    let b = num % 100;
-    let c = Math.floor(num / 10);
+    let b = Math.floor(num /100);
+    console.log(b);
     let d = 0;
     if (b !==1 ){
         d = `${unites(a)}-${tabCenti[0]}`;
-    }else if (b === 1 || a === 0){
+    }else if (b === 1){
         d = `${tabCenti[0]}`;
     }
     return d;
@@ -67,20 +70,20 @@ if (userConverti < 0 || userConverti > 999 || isNaN(userConverti)) {
     confirm(`${special10(userConverti)}`);
 
 } else if (userConverti >= 20 && userConverti <= 99) {
-    if (userConverti % 10 !== 1) {
+    
 
         confirm(`${dizaines(userConverti)}-${unites(userConverti%10)}`);
 
-    } else {
-        confirm(`${dizaines(userConverti)}-et-${unites(userConverti%10)}`);
-    }
+    
 
-} else if (userConverti >= 100 && userConverti < 1000) {
-    if (userConverti % 100 < 10 || userConverti % 100 > 19 ) {
+} else if (userConverti > 100 && userConverti < 1000) {
+    if (userConverti % 100 < 10 || userConverti % 100 > 19 || userConverti % 100 !== 0) {
 
         confirm(`${centaines(userConverti)}-${dizaines(userConverti%100)}-${unites(userConverti%10)}`);
 
     } else {
         confirm(`${centaines(userConverti)}-${special10(userConverti%100)}`);
     }
+} else if (userConverti === 100){
+    confirm(`${tabCenti[0]}`);
 }
